@@ -316,19 +316,19 @@
       "total_energy_usage": {
         "name": "Total energy"
       },
-      "t1": {
+      "T1": {
         "name": "T1 (Indoor)"
       },
-      "t2": {
+      "T2": {
         "name": "T2 (Evaporator)"
       },
-      "t3": {
+      "T3": {
         "name": "T3 (Condensor)"
       },
-      "t4": {
+      "T4": {
         "name": "T1 (Outdoor)"
       },
-      "tp": {
+      "TP": {
         "name": "TP (Discharge)"
       }
     },

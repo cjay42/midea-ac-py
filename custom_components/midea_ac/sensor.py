@@ -119,38 +119,38 @@ async def async_setup_entry(
             [
                 MideaGroup1Sensor(
                     coordinator,
-                    "t1",
+                    "T1",
                     SensorDeviceClass.TEMPERATURE,
                     UnitOfTemperature.CELSIUS,
-                    "t1",
+                    "T1",
                 ),
                 MideaGroup1Sensor(
                     coordinator,
-                    "t2",
+                    "T2",
                     SensorDeviceClass.TEMPERATURE,
                     UnitOfTemperature.CELSIUS,
-                    "t2",
+                    "T2",
                 ),
                 MideaGroup1Sensor(
                     coordinator,
-                    "t3",
+                    "T3",
                     SensorDeviceClass.TEMPERATURE,
                     UnitOfTemperature.CELSIUS,
-                    "t3",
+                    "T3",
                 ),
                 MideaGroup1Sensor(
                     coordinator,
-                    "t4",
+                    "T4",
                     SensorDeviceClass.TEMPERATURE,
                     UnitOfTemperature.CELSIUS,
-                    "t4",
+                    "T4",
                 ),
                 MideaGroup1Sensor(
                     coordinator,
-                    "tp",
+                    "TP",
                     SensorDeviceClass.TEMPERATURE,
                     UnitOfTemperature.CELSIUS,
-                    "tp",
+                    "TP",
                 ),
             ]
         )
