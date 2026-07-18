@@ -319,6 +319,9 @@
       "compressor_frequency": {
         "name": "Compressor frequency"
       },
+      "indoor_fan_speed": {
+        "name": "Indoor fan speed"
+      },
       "T1": {
         "name": "T1 (Indoor)"
       },

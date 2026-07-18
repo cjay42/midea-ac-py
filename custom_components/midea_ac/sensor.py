@@ -7,7 +7,7 @@ from homeassistant.components.sensor import (SensorDeviceClass, SensorEntity,
                                              SensorStateClass)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (PERCENTAGE, UnitOfEnergy, UnitOfPower,
-                                 UnitOfTemperature, UnitOfFrequency)
+                                 UnitOfTemperature, UnitOfFrequency, REVOLUTIONS_PER_MINUTE)
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from msmart.utils import MideaIntEnum
@@ -162,14 +162,28 @@ async def async_setup_entry(
             ]
         )
 
+    if hasattr(device, "enable_group2_data_requests"):
+        entities.extend(
+            [
+                MideaGroup2Sensor(
+                    coordinator,
+                    "indoor_fan_speed",
+                    None,
+                    REVOLUTIONS_PER_MINUTE,
+                    "indoor_fan_speed",
+                )
+            ]
+        )
+
     if hasattr(device, "outdoor_fan_speed") and hasattr(device, "enable_group5_data_requests"):
         entities.append(MideaGroup5Sensor(
             coordinator,
             "outdoor_fan_speed",
             None,
-            None,
+            REVOLUTIONS_PER_MINUTE,
             "outdoor_fan_speed",
         ))
+
 
     add_entities(entities)
 

@@ -37,6 +37,7 @@ class MideaDeviceUpdateCoordinator(DataUpdateCoordinator, Generic[MideaDevice]):
         self._proxy: MideaDeviceProxy[MideaDevice] = MideaDeviceProxy(device)
         self._energy_sensors = 0
         self._group1_entities = 0
+        self._group2_entities = 0
         self._group5_entities = 0
 
     async def _async_update_data(self) -> None:
@@ -102,6 +103,29 @@ class MideaDeviceUpdateCoordinator(DataUpdateCoordinator, Generic[MideaDevice]):
         # Disable requests if last entity
         self._proxy.set_direct(
             "enable_group1_data_requests", self._group1_entities > 0)
+        
+    def register_group2_entity(self) -> None:
+        """Record that a group2 data entity is active."""
+
+        if not hasattr(self._proxy, "enable_group2_data_requests"):
+            raise TypeError("Device does not support group 2 data.")
+
+        self._group2_entities += 1
+
+        # Enable requests
+        self._proxy.set_direct("enable_group2_data_requests", True)
+
+    def unregister_group2_entity(self) -> None:
+        """Record that a group2 data entity is inactive."""
+
+        if not hasattr(self._proxy, "enable_group2_data_requests"):
+            raise TypeError("Device does not support group 2 data.")
+
+        self._group2_entities -= 1
+
+        # Disable requests if last entity
+        self._proxy.set_direct(
+            "enable_group2_data_requests", self._group2_entities > 0)
 
     def register_group5_entity(self) -> None:
         """Record that a group5 data entity is active."""
@@ -160,6 +184,26 @@ class MideaGroup1Entity(MideaCoordinatorEntity):
 
         # Unregister group1 sensor with coordinator
         self.coordinator.unregister_group1_entity()
+
+class MideaGroup2Entity(MideaCoordinatorEntity):
+    """Entity that relies on Group2 data."""
+
+    async def async_added_to_hass(self) -> None:
+        """Run when entity about to be added to hass."""
+        # Call super method to ensure lifecycle is properly handled
+        await super().async_added_to_hass()
+
+        # Register group 2 sensor with coordinator
+        self.coordinator.register_group2_entity()
+
+    async def async_will_remove_from_hass(self) -> None:
+        """Run when entity will be removed from hass."""
+        # Call super method to ensure lifecycle is properly handled
+        await super().async_will_remove_from_hass()
+
+        # Unregister group2 sensor with coordinator
+        self.coordinator.unregister_group2_entity()
+
 
 class MideaGroup5Entity(MideaCoordinatorEntity):
     """Entity that relies on Group5 data."""
