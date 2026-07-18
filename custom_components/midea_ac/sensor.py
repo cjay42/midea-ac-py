@@ -120,6 +120,7 @@ async def async_setup_entry(
                 MideaGroup1Sensor(
                     coordinator,
                     "compressor_frequency",
+                    None,
                     UnitOfFrequency.HERTZ,
                     "compressor_frequency",
                 ),
