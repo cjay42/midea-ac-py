@@ -16,7 +16,7 @@ from .const import (CONF_ENERGY_DATA_FORMAT, CONF_ENERGY_DATA_SCALE,
                     CONF_ENERGY_SENSOR, CONF_POWER_SENSOR, DOMAIN,
                     EnergyFormat)
 from .coordinator import (MideaCoordinatorEntity, MideaDeviceUpdateCoordinator,
-                          MideaGroup1Entity, MideaGroup5Entity)
+                          MideaGroup1Entity, MideaGroup2Entity, MideaGroup5Entity)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -312,6 +312,18 @@ class MideaGroup1Sensor(MideaSensor, MideaGroup1Entity):
         MideaSensor.__init__(self, *args, **kwargs)
 
         # Group1 sensors start disabled in case device doesn't support them
+        self._attr_entity_registry_enabled_default = False
+
+class MideaGroup2Sensor(MideaSensor, MideaGroup2Entity):
+    """Sensor for Midea AC group 2 data."""
+
+    def __init__(self,
+                 *args,
+                 **kwargs
+                 ) -> None:
+        MideaSensor.__init__(self, *args, **kwargs)
+
+        # Group2 sensors start disabled in case device doesn't support them
         self._attr_entity_registry_enabled_default = False
 
 
