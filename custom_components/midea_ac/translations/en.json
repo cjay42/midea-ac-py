@@ -315,6 +315,21 @@
       },
       "total_energy_usage": {
         "name": "Total energy"
+      },
+      "t1": {
+        "name": "T1 (Indoor)"
+      },
+      "t2": {
+        "name": "T2 (Evaporator)"
+      },
+      "t3": {
+        "name": "T3 (Condensor)"
+      },
+      "t4": {
+        "name": "T1 (Outdoor)"
+      },
+      "tp": {
+        "name": "TP (Discharge)"
       }
     },
     "switch": {

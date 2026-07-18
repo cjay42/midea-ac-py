@@ -16,7 +16,7 @@ from .const import (CONF_ENERGY_DATA_FORMAT, CONF_ENERGY_DATA_SCALE,
                     CONF_ENERGY_SENSOR, CONF_POWER_SENSOR, DOMAIN,
                     EnergyFormat)
 from .coordinator import (MideaCoordinatorEntity, MideaDeviceUpdateCoordinator,
-                          MideaGroup5Entity)
+                          MideaGroup1Entity, MideaGroup5Entity)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -113,6 +113,47 @@ async def async_setup_entry(
                     scale=power_scale,
                 )
             ])
+
+    if hasattr(device, "enable_group1_data_requests"):
+        entities.extend(
+            [
+                MideaGroup1Sensor(
+                    coordinator,
+                    "t1",
+                    SensorDeviceClass.TEMPERATURE,
+                    UnitOfTemperature.CELSIUS,
+                    "t1",
+                ),
+                MideaGroup1Sensor(
+                    coordinator,
+                    "t2",
+                    SensorDeviceClass.TEMPERATURE,
+                    UnitOfTemperature.CELSIUS,
+                    "t2",
+                ),
+                MideaGroup1Sensor(
+                    coordinator,
+                    "t3",
+                    SensorDeviceClass.TEMPERATURE,
+                    UnitOfTemperature.CELSIUS,
+                    "t3",
+                ),
+                MideaGroup1Sensor(
+                    coordinator,
+                    "t4",
+                    SensorDeviceClass.TEMPERATURE,
+                    UnitOfTemperature.CELSIUS,
+                    "t4",
+                ),
+                MideaGroup1Sensor(
+                    coordinator,
+                    "tp",
+                    SensorDeviceClass.TEMPERATURE,
+                    UnitOfTemperature.CELSIUS,
+                    "tp",
+                ),
+            ]
+        )
 
     if hasattr(device, "outdoor_fan_speed") and hasattr(device, "enable_group5_data_requests"):
         entities.append(MideaGroup5Sensor(
@@ -238,6 +279,19 @@ class MideaEnergySensor(MideaSensor):
             return None
 
         return value * self._scale
+
+
+class MideaGroup1Sensor(MideaSensor, MideaGroup1Entity):
+    """Sensor for Midea AC group 1 data."""
+
+    def __init__(self,
+                 *args,
+                 **kwargs
+                 ) -> None:
+        MideaSensor.__init__(self, *args, **kwargs)
+
+        # Group1 sensors start disabled in case device doesn't support them
+        self._attr_entity_registry_enabled_default = False
 
 
 class MideaGroup5Sensor(MideaSensor, MideaGroup5Entity):
