@@ -7,7 +7,7 @@ from homeassistant.components.sensor import (SensorDeviceClass, SensorEntity,
                                              SensorStateClass)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (PERCENTAGE, UnitOfEnergy, UnitOfPower,
-                                 UnitOfTemperature)
+                                 UnitOfTemperature, UnitOfFrequency)
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from msmart.utils import MideaIntEnum
@@ -117,6 +117,12 @@ async def async_setup_entry(
     if hasattr(device, "enable_group1_data_requests"):
         entities.extend(
             [
+                MideaGroup1Sensor(
+                    coordinator,
+                    "compressor_frequency",
+                    UnitOfFrequency.HERTZ,
+                    "compressor_frequency",
+                ),
                 MideaGroup1Sensor(
                     coordinator,
                     "T1",

@@ -316,6 +316,9 @@
       "total_energy_usage": {
         "name": "Total energy"
       },
+      "compressor_frequency": {
+        "name": "Compressor frequency"
+      },
       "T1": {
         "name": "T1 (Indoor)"
       },
