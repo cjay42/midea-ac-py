@@ -1,0 +1,4 @@
+[submodule "custom_components/midea_ac/msmart"]
+	path = custom_components/midea_ac/msmart
+	url = git@github.com:cjay42/midea-msmart.git
+	branch = extra-sensors
