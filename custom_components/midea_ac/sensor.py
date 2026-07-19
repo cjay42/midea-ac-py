@@ -7,6 +7,7 @@ from homeassistant.components.sensor import (SensorDeviceClass, SensorEntity,
                                              SensorStateClass)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (PERCENTAGE, UnitOfEnergy, UnitOfPower,
+                                 UnitOfElectricPotential, UnitOfElectricCurrent,
                                  UnitOfTemperature, UnitOfFrequency, REVOLUTIONS_PER_MINUTE)
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -123,6 +124,27 @@ async def async_setup_entry(
                     None,
                     UnitOfFrequency.HERTZ,
                     "compressor_frequency",
+                ),
+                MideaGroup1Sensor(
+                    coordinator,
+                    "outdoor_unit_voltage",
+                    None,
+                    UnitOfElectricPotential.VOLT,
+                    "outdoor_unit_voltage",
+                ),
+                MideaGroup1Sensor(
+                    coordinator,
+                    "outdoor_unit_total_current",
+                    None,
+                    UnitOfElectricCurrent.AMPERE,
+                    "outdoor_unit_total_current",
+                ),
+                MideaGroup1Sensor(
+                    coordinator,
+                    "calculated_target_compressor_frequency",
+                    None,
+                    UnitOfFrequency.HERTZ,
+                    "calculated_target_compressor_frequency",
                 ),
                 MideaGroup1Sensor(
                     coordinator,

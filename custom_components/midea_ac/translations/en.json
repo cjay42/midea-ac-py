@@ -319,6 +319,15 @@
       "compressor_frequency": {
         "name": "Compressor frequency"
       },
+      "calculated_target_compressor_frequency": {
+        "name": "Calculated target compressor frequency"
+      },
+      "outdoor_unit_voltage": {
+        "name": "Compressor voltage"
+      },
+      "outdoor_unit_total_current": {
+        "name": "Compressor current"
+      },
       "indoor_fan_speed": {
         "name": "Indoor fan speed"
       },
