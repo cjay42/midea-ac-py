@@ -336,6 +336,9 @@
       },
       "TP": {
         "name": "TP (Discharge)"
+      },
+      "exv_opening_steps": {
+        "name": "Expansion valve opening steps"
       }
     },
     "switch": {

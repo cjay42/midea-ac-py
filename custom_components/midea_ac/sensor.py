@@ -175,14 +175,29 @@ async def async_setup_entry(
             ]
         )
 
-    if hasattr(device, "outdoor_fan_speed") and hasattr(device, "enable_group5_data_requests"):
-        entities.append(MideaGroup5Sensor(
-            coordinator,
-            "outdoor_fan_speed",
-            None,
-            REVOLUTIONS_PER_MINUTE,
-            "outdoor_fan_speed",
-        ))
+    if hasattr(device, "enable_group5_data_requests"):
+        if hasattr(device, "outdoor_fan_speed"):
+            entities.append(
+                MideaGroup5Sensor(
+                    coordinator,
+                    "outdoor_fan_speed",
+                    None,
+                    REVOLUTIONS_PER_MINUTE,
+                    "outdoor_fan_speed",
+                )
+            )
+        
+        entities.extend(
+            [
+                MideaGroup5Sensor(
+                    coordinator,
+                    "exv_opening_steps",
+                    None,
+                    None,
+                    "exv_opening_steps",
+                )
+            ]
+        )
 
 
     add_entities(entities)
